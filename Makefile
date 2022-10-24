@@ -25,18 +25,18 @@ build_release/Makefile:
 
 # build using cmake
 build-impl-%: build_%/Makefile
-	@cmake --build build_$* -j $(NPROCS) --target service_template
+	@cmake --build build_$* -j $(NPROCS) --target shbr_devops_cpp
 
 # test
 test-impl-%: build-impl-%
-	@cmake --build build_$* -j $(NPROCS) --target service_template_unittest
-	@cmake --build build_$* -j $(NPROCS) --target service_template_benchmark
+	@cmake --build build_$* -j $(NPROCS) --target shbr_devops_cpp_unittest
+	@cmake --build build_$* -j $(NPROCS) --target shbr_devops_cpp_benchmark
 	@cd build_$* && ((test -t 1 && GTEST_COLOR=1 PYTEST_ADDOPTS="--color=yes" ctest -V) || ctest -V)
 	@pep8 tests
 
 # testsuite service runner
 service-impl-start-%: build-impl-%
-	@cd ./build_$* && $(MAKE) start-service_template
+	@cd ./build_$* && $(MAKE) start-shbr_devops_cpp
 
 # clean
 clean-impl-%:
@@ -58,35 +58,35 @@ format:
 
 install: build-release
 	@cd build_release && \
-		cmake --install . -v --component service_template
+		cmake --install . -v --component shbr_devops_cpp
 
 install-debug: build-debug
 	@cd build_debug && \
-		cmake --install . -v --component service_template
+		cmake --install . -v --component shbr_devops_cpp
 
 # Hide target, use only in docker environment
 --debug-start-in-docker: install-debug
-	@/home/user/.local/bin/service_template \
-		--config /home/user/.local/etc/service_template/static_config.yaml
+	@/home/user/.local/bin/shbr_devops_cpp \
+		--config /home/user/.local/etc/shbr_devops_cpp/static_config.yaml
 
 # Hide target, use only in docker environment
 --debug-start-in-docker-debug: install-debug
-	@/home/user/.local/bin/service_template \
-		--config /home/user/.local/etc/service_template/static_config.yaml
+	@/home/user/.local/bin/shbr_devops_cpp \
+		--config /home/user/.local/etc/shbr_devops_cpp/static_config.yaml
 
 .PHONY: docker-cmake-debug docker-build-debug docker-test-debug docker-clean-debug docker-cmake-release docker-build-release docker-test-release docker-clean-release docker-install docker-install-debug docker-start-service-debug docker-start-service docker-clean-data
 
 # Build and runs service in docker environment
 docker-start-service:
-	@docker-compose run -p 8080:8080 --rm service_template make -- --debug-start-in-docker
+	@docker-compose run -p 8080:8080 --rm shbr_devops_cpp make -- --debug-start-in-docker
 
 # Build and runs service in docker environment
 docker-start-service-debug:
-	@docker-compose run -p 8080:8080 --rm service_template make -- --debug-start-in-docker-debug
+	@docker-compose run -p 8080:8080 --rm shbr_devops_cpp make -- --debug-start-in-docker-debug
 
 # Start targets makefile in docker environment
 docker-impl-%:
-	docker-compose run --rm service_template make $*
+	docker-compose run --rm shbr_devops_cpp make $*
 
 # Explicitly specifying the targets to help shell with completions
 cmake-debug: build_debug/Makefile

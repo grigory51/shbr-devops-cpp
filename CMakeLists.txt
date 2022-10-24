@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(service_template CXX)
+project(shbr_devops_cpp CXX)
 
 include(third_party/userver/cmake/SetupEnvironment.cmake)
 include(GNUInstallDirs)
