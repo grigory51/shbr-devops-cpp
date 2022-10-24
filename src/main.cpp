@@ -6,7 +6,7 @@
 #include <userver/server/handlers/tests_control.hpp>
 
 
-#include "hello.hpp"
+#include "echo.hpp"
 
 int main(int argc, char *argv[]) {
   auto component_list = userver::components::MinimalServerComponentList()
@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
                             .Append<userver::components::HttpClient>()
                             .Append<userver::server::handlers::TestsControl>();
 
-  shbr_devops_cpp::AppendHello(component_list);
+  shbr_devops_cpp::AppendEcho(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
