@@ -1,7 +1,8 @@
 CMAKE_COMMON_FLAGS += -DUSERVER_FEATURE_CRYPTOPP_BLAKE=0 \
                       -DUSERVER_FEATURE_CRYPTOPP_BLAKE2=0 \
                       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-                      -DUSERVER_FEATURE_REDIS_HI_MALLOC=1 \
+                      -DUSERVER_FEATURE_REDIS=0 \
+                      -DUSERVER_FEATURE_RABBITMQ=0 \
                       -DUSERVER_CHECK_PACKAGE_VERSIONS=0 \
                       -DUSERVER_FEATURE_CLICKHOUSE=0 \
                       -DOPENSSL_ROOT_DIR=$(shell brew --prefix openssl@1.1) \
