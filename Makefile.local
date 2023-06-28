@@ -5,10 +5,11 @@ CMAKE_COMMON_FLAGS += -DUSERVER_FEATURE_CRYPTOPP_BLAKE=0 \
                       -DUSERVER_FEATURE_RABBITMQ=0 \
                       -DUSERVER_CHECK_PACKAGE_VERSIONS=0 \
                       -DUSERVER_FEATURE_CLICKHOUSE=0 \
-                      # -DOPENSSL_ROOT_DIR=$(shell brew --prefix openssl@1.1) \
-                      -DUSERVER_FEATURE_UTEST=0 \
-                      -DUSERVER_LTO=0 \
                       -DBENCHMARK_ENABLE_WERROR=0 \
                       -DUSERVER_FEATURE_MONGODB=0 \
                       -DUSERVER_FEATURE_POSTGRESQL=0 \
-                      -DUSERVER_FEATURE_GRPC=0
+                      -DUSERVER_FEATURE_GRPC=0 \
+		                  -DUSERVER_FEATURE_UTEST=0 \
+                      -DUSERVER_LTO=0 \
+                      # -DOPENSSL_ROOT_DIR=$(shell brew --prefix openssl@1.1) \
+		                  -DUSERVER_USE_LD="gold"
